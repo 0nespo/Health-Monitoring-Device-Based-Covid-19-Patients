@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/splide.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/leaflet.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>PANTAU | Pantau Dini, Keluarga Terlindungi</title>
+</head>
+<body style="overflow-x:hidden">
+  <nav>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="">
+    </a>
+    <ul class="menus">
+      <li><a href="/">Home</a></li>
+      <li><a href="our-product.html">Our Product</a></li>
+      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="login.html" class="login">Login</a></li>
+    </ul>
+    <a href="#" class="hamburger">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
+    </a>
+  </nav>
+  <div class="content">
+    <div class="splide" id="image-slider">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide bg-top-center">
+            <img src="images/slide1.jpg" alt="">
+            <div class="splide__text">
+              <p>Menjadi Mitra Terpercaya untuk memenuhi kebutuhan pengawasan dari mana saja dan kapan saja</p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide2.jpg" alt="">
+            <div class="splide__text">
+              <h3>Apa itu PANTAU?</h3>
+              <p>Pantau adalah grup yang mempunyai fokus dalam sistem pengawasan melalui media smartwatch dengan menerapkan prinsip IoT
+              </p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide3.jpg" alt="">
+            <div class="splide__text">
+              <p>Saat ini Pantau sedang fokus mengembangkan smartwatch berbasis IoT untuk menangani bidang kesehatan terutama yang sedang terkait dengan Covid-19</p>
+            </div>
+          </li>
+          <li class="splide__slide bg-center-center">
+            <img src="images/slide4.jpg" alt="">
+            <div class="splide__text big-text">
+              <p>#Pantau Dini, Keluarga Terlindungi</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="map-home"></div>
+  </div>
+
+  <script src="js/splide.min.js"></script>
+  <script src="js/leaflet.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener( 'DOMContentLoaded', function() {
+      var splide = new Splide( '#image-slider', {
+        width : '100vw',
+		    height: '400px',
+        type: 'loop',
+        cover: true,
+        heightRatio: 0.5,
+      } );
+      splide.mount();
+    } );
+
+    var channel_1 = JSON.parse(Get('https://api.thingspeak.com/channels/1647842/feeds.json?api_key=BG370R10VM3PR7BC&results=2'));
+    console.dir(channel_1);
+    console.log(channel_1.feeds[0].field1);
+
+    var map = L.map('map-home', {
+      dragging: false,
+      scrollWheelZoom: false,
+      }).setView([-6.362480397433, 106.82404411061857], 16);
+      // var map = L.map('map-db').setView([51.508, -0.11], 16);
+
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=vPVqdMuRowKnXesdqmzl', {
+      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+    }).addTo(map);
+
+    var markerIcon = L.Icon.extend({
+        options: {
+          shadowUrl: 'css/images/marker-shadow.png',
+
+          iconSize:     [40, 40], // size of the icon
+          shadowSize:   [41, 41], // size of the shadow
+          iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+          shadowAnchor: [12, 39],  // the same for the shadow
+          popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+        }
+    });
+
+    var greenIcon = new markerIcon({iconUrl: 'css/images/marker-green.png'}),
+    redIcon = new markerIcon({iconUrl: 'css/images/marker-red.png'}),
+    yellowIcon = new markerIcon({iconUrl: 'css/images/marker-yellow.png'});
+
+    var circle = L.circle([-6.362480397433, 106.82404411061857], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.3,
+        radius: 200
+    }).addTo(map);
+    
+    var marker_1 = L.marker([-6.362480397433, 106.82404411061857], {icon: greenIcon}).addTo(map);
+
+    setTimeout(() =>{
+      marker_1.setLatLng([-6.36, 106.82404411061857])
+      marker_1.setIcon(yellowIcon)
+    }, 2000)
+  </script>
+</body>
+</html>

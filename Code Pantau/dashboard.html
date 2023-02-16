@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/splide.min.css">
+  <link rel="stylesheet" href="css/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <title>PANTAU | Dashboard</title>
+</head>
+<body style="overflow-x: hidden">
+  <audio id="notificationAudio">
+    <source src="audio/notification.ogg" type="audio/ogg">
+    <source src="audio/notification.mp3" type="audio/mpeg">
+  </audio>
+  <nav>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="">
+    </a>
+    <ul class="menus">
+      <li>Hello, <span class="username-placeholder"></span>!</li>
+      <li><a href="login.html" class="login">Logout</a></li>
+    </ul>
+    <a href="#" class="hamburger">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>
+    </a>
+  </nav>
+  <div class="content dashboard-content">
+    <div id="map-db"></div>
+    <div class="toolbar">
+      <div class="toolbar-toggle">
+        <a href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
+        </a>
+      </div>
+      <div class="toolbar-content">
+        <div class="person-status person-1">
+          <p class="person-name">Device 1</p>
+          <p>Suhu: <span class="person-suhu"></span></p>
+          <p>spo2: <span class="person-spo2"></span></p>
+          <p>Heart Rate: <span class="person-hr"></span></p>
+          <p>Longitude: <span class="person-long"></span></p> 
+          <p>Latitude: <span class="person-lat"></span></p> 
+          <p>Panic Button: <span class="person-panic"></span></p>
+          <a href="#" target="_blank" class="person-history">History</a> 
+        </div>
+        <div class="person-status person-2">
+          <p class="person-name">Device 2</p>
+          <p>Suhu: <span class="person-suhu"></span></p>
+          <p>spo2: <span class="person-spo2"></span></p>
+          <p>Heart Rate: <span class="person-hr"></span></p>
+          <p>Longitude: <span class="person-long"></span></p>
+          <p>Latitude: <span class="person-lat"></span></p> 
+          <p>Panic Button: <span class="person-panic"></span></p> 
+          <a href="#" target="_blank" class="person-history">History</a> 
+        </div>
+        <div class="person-status person-3">
+          <p class="person-name">Device 3</p>
+          <p>Suhu: <span class="person-suhu"></span></p>
+          <p>spo2: <span class="person-spo2"></span></p>
+          <p>Heart Rate: <span class="person-hr"></span></p>
+          <p>Longitude: <span class="person-long"></span></p>
+          <p>Latitude: <span class="person-lat"></span></p> 
+          <p>Panic Button: <span class="person-panic"></span></p> 
+          <a href="#" target="_blank" class="person-history">History</a> 
+        </div>
+        <div class="person-status person-4">
+          <p class="person-name">Device 4</p>
+          <p>Suhu: <span class="person-suhu"></span></p>
+          <p>spo2: <span class="person-spo2"></span></p>
+          <p>Heart Rate: <span class="person-hr"></span></p>
+          <p>Longitude: <span class="person-long"></span></p>
+          <p>Latitude: <span class="person-lat"></span></p> 
+          <p>Panic Button: <span class="person-panic"></span></p> 
+          <a href="#" target="_blank" class="person-history">History</a> 
+        </div>
+      </div>
+    </div>
+    <div class="notifications">
+      <!-- <div class="notification">
+        <a href="#" class="cross">
+          <div class="left-cross"></div>
+          <div class="right-cross"></div>
+        </a>
+        <h3>Warning on Device 1!</h3>
+        <h4>The device is out of range!</h4>
+        <p>Temp: 40 | SO2: 40 | Heartbeat: 40</p>
+        <p>Longitude: -23.1 | Latitude: 13.5</p>
+      </div> -->
+  </div>
+  <script src="js/leaflet.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
